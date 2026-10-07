@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عالم هُدى الرقمي | الخدمات البرمجية والأكاديمية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-main: #070b19;
+            --bg-card: rgba(13, 22, 45, 0.7);
+            --accent-glow: #3b82f6;
+            --accent-light: #60a5fa;
+            --text-dark: #ffffff;
+            --text-muted: #94a3b8;
+            --border-color: rgba(59, 130, 246, 0.25);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Tajawal', sans-serif; scroll-behavior: smooth; }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-dark);
+            line-height: 1.6;
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(29, 78, 216, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(37, 99, 235, 0.1) 0%, transparent 40%);
+            min-height: 100vh;
+        }
+
+        header {
+            background: rgba(7, 11, 25, 0.85);
+            backdrop-filter: blur(12px);
+            padding: 1rem 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .logo { font-size: 1.4rem; font-weight: 800; display: flex; align-items: center; gap: 10px; cursor: pointer; }
+        nav { display: flex; justify-content: center; align-items: center; gap: 25px; }
+        nav a { color: var(--text-muted); text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: color 0.3s; cursor: pointer; }
+        nav a:hover { color: var(--accent-light); }
+
+        .header-cta-group { display: flex; align-items: center; gap: 8px; }
+        .header-cta {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: #fff;
+            padding: 6px 14px;
+            border-radius: 16px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        .header-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(37, 99, 235, 0.5); }
+
+        /* ===== الواجهة الرئيسية ===== */
+        .hero {
+            padding: 3rem 5%;
+            position: relative;
+            min-height: calc(100vh - 80px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 1s ease-in-out;
+            overflow: hidden;
+        }
+        .hero-container {
+            max-width: 1300px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 0.85fr 1.15fr;
+            gap: 30px;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 1.2rem;
+            line-height: 1.35;
+            color: #fff;
+        }
+        .hero-content h1 span {
+            display: block;
+            background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero-content p {
+            font-size: 1.08rem;
+            margin-bottom: 2rem;
+            color: #cbd5e1;
+            line-height: 1.9;
+            max-width: 480px;
+        }
+        .btn-whatsapp-wrapper { display: flex; justify-content: flex-start; width: 100%; }
+        .btn-whatsapp {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: #ffffff !important;
+            padding: 15px 34px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 28px rgba(37, 99, 235, 0.55), inset 0 1px 0 rgba(255,255,255,.25);
+            cursor: pointer;
+            font-size: 1.05rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .btn-whatsapp i { font-size: 1.3rem; }
+        .btn-whatsapp:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(37, 99, 235, 0.75); }
+
+        /* ===== اللابتوب والبطاقات (كود حقيقي) ===== */
+        .hero-visual { position: relative; width: 100%; max-width: 740px; margin: 0 auto; aspect-ratio: 1.42 / 1; container-type: inline-size; direction: ltr; }
+        .hero-visual .glow { position: absolute; inset: -8% -6%; background: radial-gradient(ellipse 60% 55% at 50% 58%, rgba(37,99,235,.65), rgba(29,78,216,.25) 45%, transparent 72%); filter: blur(14px); }
+        .hero-visual .ring { position: absolute; left: 50%; border-radius: 50%; transform: translateX(-50%) rotateX(72deg); border: 2px solid rgba(96,165,250,.55); box-shadow: 0 0 3cqw rgba(59,130,246,.9), inset 0 0 3cqw rgba(59,130,246,.6); }
+        .ring.r1 { width: 80cqw; height: 80cqw; bottom: -22cqw; }
+        .ring.r2 { width: 64cqw; height: 64cqw; bottom: -14cqw; opacity: .7; }
+        .ring.r3 { width: 96cqw; height: 96cqw; bottom: -30cqw; opacity: .35; }
+
+        .scene { position: absolute; left: 23%; width: 56%; top: 17%; perspective: 1500px; }
+        .lap { position: relative; width: 100%; aspect-ratio: 16 / 10.2; transform-style: preserve-3d; transform: rotateX(-3deg) rotateY(17deg); }
+        .lap-screen { position: absolute; inset: 0; background: linear-gradient(145deg, #3b4658, #0b1222 60%); border-radius: 1.4cqw; padding: .9cqw; transform-origin: bottom; transform: rotateX(7deg);
+            box-shadow: 0 0 0 1px #64748b inset, 0 0 6cqw rgba(59,130,246,.55), 0 3cqw 6cqw rgba(0,0,0,.6); }
+        .display { width: 100%; height: 100%; background: #050c22; border-radius: .8cqw; position: relative; overflow: hidden; display: grid; grid-template-columns: 11% 1fr; gap: 1.2cqw; padding: 1.4cqw; font-size: 1cqw; }
+        .display::after { content: ''; position: absolute; inset: 0; background: linear-gradient(115deg, rgba(255,255,255,.12), transparent 35%); pointer-events: none; }
+        .d-side { background: rgba(30,58,138,.35); border: 1px solid rgba(59,130,246,.25); border-radius: .6cqw; padding: 1cqw .7cqw; display: flex; flex-direction: column; gap: .9cqw; }
+        .d-side i { display: block; height: .7cqw; border-radius: 1cqw; background: #3b82f6; opacity: .55; }
+        .d-side i:nth-child(1) { background: #93c5fd; opacity: 1; width: 60%; }
+        .d-side i:nth-child(odd) { width: 80%; }
+        .d-main { display: grid; grid-template-columns: 1.15fr 1fr; grid-template-rows: 1.25fr 1fr; gap: 1.2cqw; min-height: 0; }
+        .d-box { background: rgba(10,20,48,.92); border: 1px solid rgba(59,130,246,.3); border-radius: .6cqw; padding: 1cqw; overflow: hidden; min-height: 0; }
+        .d-code { display: flex; flex-direction: column; gap: .75cqw; }
+        .d-code div { display: flex; gap: .6cqw; }
+        .d-code b { height: .45cqw; border-radius: 1cqw; display: block; }
+        .d-chart svg { width: 100%; height: 100%; display: block; }
+        .d-card { background: linear-gradient(135deg, #fff, #cbd5e1); display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 1.7cqw; color: #1d4ed8; letter-spacing: .1cqw; }
+        .d-tiles { display: grid; grid-template-columns: 1fr 1fr; gap: .8cqw; }
+        .d-tiles b { border-radius: .5cqw; display: block; }
+
+        .lap-deck { position: absolute; left: -2%; width: 104%; top: 99.5%; height: 66%; transform-origin: top; transform: rotateX(74deg);
+            background: linear-gradient(#dbe3ee, #94a3b8 60%, #64748b); border-radius: .4cqw .4cqw 2cqw 2cqw; box-shadow: inset 0 1px 0 #fff, 0 0 5cqw rgba(59,130,246,.5), 0 2cqw 5cqw rgba(0,0,0,.6); }
+        .lap-deck .keys { position: absolute; inset: 9% 6% 38% 6%; background:
+            repeating-linear-gradient(90deg, #1e293b 0 5.2%, #475569 5.2% 5.8%),
+            #1e293b; border-radius: .5cqw; -webkit-mask: repeating-linear-gradient(0deg, #000 0 14%, transparent 14% 18%); mask: repeating-linear-gradient(0deg, #000 0 14%, transparent 14% 18%); }
+        .lap-deck .keys-bg { position: absolute; inset: 7% 5% 36% 5%; background: #0f172a; border-radius: .6cqw; box-shadow: inset 0 0 1cqw #000; }
+        .lap-deck .pad { position: absolute; left: 35%; width: 30%; bottom: 8%; height: 22%; border: 1px solid #94a3b8; border-radius: .6cqw; background: linear-gradient(#cbd5e1, #94a3b8); box-shadow: inset 0 1px 0 #fff; }
+
+        .floating-badge { position: absolute; direction: rtl; display: flex; align-items: center; gap: 1.2cqw; padding: 1.5cqw 2.4cqw; border-radius: 2cqw; font-size: max(11px, 2.35cqw); font-weight: 700; color: #fff; white-space: nowrap; z-index: 5;
+            background: linear-gradient(135deg, rgba(96,165,250,.38), rgba(30,41,120,.55) 60%, rgba(37,99,235,.3));
+            backdrop-filter: blur(16px) saturate(1.4); -webkit-backdrop-filter: blur(16px) saturate(1.4);
+            border: 1px solid rgba(165,205,255,.55);
+            box-shadow: 0 2cqw 4cqw rgba(0,0,0,.45), 0 0 3.5cqw rgba(59,130,246,.45), inset 0 1px 0 rgba(255,255,255,.45), inset 0 -1px 0 rgba(59,130,246,.4);
+            transform: perspective(900px) var(--t, none); animation: floatBadge 4.5s ease-in-out infinite alternate; }
+        .floating-badge::before { content: ''; position: absolute; inset: 0; border-radius: inherit; background: linear-gradient(120deg, rgba(255,255,255,.28), transparent 45%); pointer-events: none; }
+        .floating-badge i { font-size: 3.2cqw; color: #dbeafe; filter: drop-shadow(0 0 .9cqw rgba(96,165,250,1)) drop-shadow(0 0 2cqw rgba(59,130,246,.8)); width: 3.4cqw; text-align: center; }
+        .badge-graduation { top: 3%;   left: 1%;   --t: rotateY(18deg) rotateZ(-4deg);  animation-delay: 0s; }
+        .badge-web        { top: 1%;   right: 7%;  --t: rotateY(-16deg) rotateZ(3deg);  animation-delay: .6s; }
+        .badge-ai         { top: 33%;  right: -8%; --t: rotateY(-20deg) rotateZ(-2deg); animation-delay: 1.2s; }
+        .badge-projects   { bottom: 10%; right: -4%; --t: rotateY(-20deg) rotateZ(5deg); animation-delay: 1.8s; }
+        .badge-design     { bottom: 4%; left: 2%;  --t: rotateY(18deg) rotateZ(-5deg);  animation-delay: 2.4s; }
+        .badge-data       { top: 38%;  left: -7%;  --t: rotateY(20deg) rotateZ(2deg);   animation-delay: 3s; }
+        @keyframes floatBadge { from { translate: 0 0; } to { translate: 0 -1.2cqw; } } }
+
+        .page-section { display: none; }
+        .page-section.active { display: block; animation: fadeIn 0.5s ease-in-out; }
+        .hero.page-section.active { display: flex; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 4rem 2rem; }
+        .section-title { text-align: center; font-size: 2.2rem; font-weight: 800; margin-bottom: 2.5rem; color: var(--text-dark); }
+        .global-payment-notice {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 14px 20px;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            color: var(--accent-light);
+            font-weight: 700;
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            backdrop-filter: blur(10px);
+        }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
+        .card {
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .card:hover { transform: translateY(-5px); border-color: rgba(59, 130, 246, 0.5); box-shadow: 0 15px 35px rgba(37, 99, 235, 0.15); }
+        .card h3 { font-size: 1.25rem; margin-bottom: 1rem; color: var(--text-dark); display: flex; align-items: center; gap: 12px; }
+        .card h3 i { color: var(--accent-light); background: rgba(59, 130, 246, 0.1); padding: 10px; border-radius: 10px; border: 1px solid var(--border-color); }
+        .card ul { list-style: none; margin-bottom: 1.5rem; }
+        .card ul li { padding: 6px 0; position: relative; padding-right: 22px; color: var(--text-muted); font-size: 0.95rem; }
+        .card ul li::before { content: '✦'; position: absolute; right: 0; color: var(--accent-light); font-size: 0.75rem; }
+        .card ul li.main-item { font-weight: 700; color: var(--text-dark); margin-top: 12px; padding-right: 0; }
+        .card ul li.main-item::before { display: none; }
+        .card ul li.sub-item { padding-right: 25px; font-size: 0.9rem; }
+
+        .project-img { width: 100%; height: 180px; object-fit: cover; border-radius: 10px; margin-bottom: 1rem; border: 1px solid var(--border-color); }
+        .card-btn {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--text-dark);
+            text-align: center;
+            padding: 12px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            border: 1px solid var(--border-color);
+        }
+        .card-btn:hover { background: #2563eb; color: #ffffff; border-color: #2563eb; }
+        .faq-container { max-width: 800px; margin: 0 auto; }
+        .faq-item { background: var(--bg-card); backdrop-filter: blur(12px); border-radius: 12px; margin-bottom: 1rem; padding: 1.5rem; border: 1px solid var(--border-color); }
+        .faq-item h4 { font-size: 1.05rem; margin-bottom: 0.5rem; }
+        .faq-item p { color: var(--text-muted); font-size: 0.95rem; }
+        footer { background: rgba(4, 7, 16, 0.95); text-align: center; padding: 2.5rem 2rem; margin-top: 4rem; border-top: 1px solid var(--border-color); }
+        footer p { color: var(--text-muted); font-size: 0.95rem; }
+
+        .page-section:not(.active) { display: none !important; }
+        nav a.active { color: var(--accent-light); }
+        nav a { position: relative; padding: 4px 2px; }
+        nav a.active::after { content: ''; position: absolute; right: 0; left: 0; bottom: -4px; height: 2px; border-radius: 2px; background: var(--accent-light); box-shadow: 0 0 8px var(--accent-glow); }
+        .menu-btn { display: none; background: rgba(59,130,246,.12); border: 1px solid var(--border-color); color: #fff; width: 40px; height: 40px; border-radius: 10px; font-size: 1.1rem; cursor: pointer; }
+        @media (max-width: 900px) {
+            .menu-btn { display: block; }
+            header { flex-wrap: wrap; gap: 10px; }
+            nav { display: none; order: 5; width: 100%; flex-direction: column; align-items: stretch; gap: 0; padding-top: 6px; }
+            nav.open { display: flex; }
+            nav a { padding: 12px 6px; border-top: 1px solid var(--border-color); font-size: 1rem; }
+            nav a.active::after { display: none; }
+        }
+        @media (max-width: 520px) { .header-cta { padding: 8px 10px; font-size: 0; gap: 0; } .header-cta i { font-size: 1.1rem; } .logo { font-size: 1.1rem; } }
+        @media (max-width: 900px) {
+            .hero { padding: 2rem 5%; }
+            .hero-container { grid-template-columns: 1fr; text-align: center; }
+            .hero-content h1 { font-size: 2.2rem; }
+            .hero-content p { margin-inline: auto; }
+            .btn-whatsapp-wrapper { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo" onclick="location.hash='#hero'">
+            <i class="fa-solid fa-wand-magic-sparkles" style="color: var(--accent-light);"></i> عالم هُدى الرقمي
+        </div>
+        <nav id="mainNav">
+            <a href="#hero" data-sec="hero">الرئيسية</a>
+            <a href="#services" data-sec="services">الخدمات</a>
+            <a href="#colleges" data-sec="colleges">الكليات</a>
+            <a href="#projects" data-sec="projects">مشاريعنا</a>
+            <a href="#faq" data-sec="faq">الأسئلة</a>
+        </nav>
+        <div class="header-cta-group">
+            <a href="https://wa.me/966538252405" class="header-cta" target="_blank" title="تواصل عبر واتساب">
+                <i class="fa-brands fa-whatsapp"></i> واتساب
+            </a>
+            <a href="https://t.me/enghudak" class="header-cta" target="_blank" title="تواصل عبر تليجرام" style="background: linear-gradient(135deg, #0ea5e9, #0284c7);">
+                <i class="fa-brands fa-telegram"></i> تيليجرام
+            </a>
+            <button class="menu-btn" aria-label="القائمة" onclick="document.getElementById('mainNav').classList.toggle('open')"><i class="fa-solid fa-bars"></i></button>
+        </div>
+    </header>
+
+    <!-- الواجهة الرئيسية -->
+    <section class="hero page-section active" id="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>نحوّل أفكارك الرقمية <span>إلى مشاريع مُتقنة</span></h1>
+                <p>
+                    مهندسه سعوديه 💚 أضبط لك أمورك الرقمية من ألفها لـ يائها<br>
+مواقع، تطبيقات، مشاريع تخرج، وذكاء اصطناعي<br>
+شغل مرتب ونظيف يفكك الصعب والأهم .. ( يبيض الوجه )
+               <div class="btn-whatsapp-wrapper">
+                    <a href="https://wa.me/966538252405" class="btn-whatsapp" target="_blank">
+                        <i class="fa-brands"></i> اطلب خدمتك   <i class="fa-solid fa-arrow-left"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="glow"></div>
+                <div class="ring r3"></div><div class="ring r1"></div><div class="ring r2"></div>
+
+                <div class="floating-badge badge-graduation"><i class="fa-solid fa-graduation-cap"></i> مشاريع التخرج</div>
+                <div class="floating-badge badge-web"><i class="fa-solid fa-globe"></i> المواقع والتطبيقات</div>
+                <div class="floating-badge badge-ai"><i class="fa-solid fa-brain"></i> الذكاء الاصطناعي</div>
+                <div class="floating-badge badge-projects"><i class="fa-solid fa-folder-open"></i> مشاريع متنوعة</div>
+                <div class="floating-badge badge-design"><i class="fa-solid fa-palette"></i> التصميم والعروض</div>
+                <div class="floating-badge badge-data"><i class="fa-solid fa-chart-simple"></i> تحليل البيانات</div>
+
+                <div class="scene"><div class="lap">
+                    <div class="lap-screen"><div class="display">
+                        <div class="d-side"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                        <div class="d-main">
+                            <div class="d-box d-code">
+                                <div><b style="width:12%;background:#f43f5e"></b><b style="width:40%;background:#60a5fa"></b></div>
+                                <div><b style="width:8%;background:#34d399"></b><b style="width:55%;background:#94a3b8"></b></div>
+                                <div><b style="width:18%;background:#fbbf24"></b><b style="width:35%;background:#60a5fa"></b></div>
+                                <div><b style="width:10%;background:#f43f5e"></b><b style="width:60%;background:#34d399"></b></div>
+                                <div><b style="width:22%;background:#60a5fa"></b><b style="width:30%;background:#94a3b8"></b></div>
+                                <div><b style="width:14%;background:#fbbf24"></b><b style="width:48%;background:#60a5fa"></b></div>
+                                <div><b style="width:30%;background:#34d399"></b></div>
+                            </div>
+                            <div class="d-box d-chart">
+                                <svg viewBox="0 0 100 60" preserveAspectRatio="none">
+                                    <defs><linearGradient id="cg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3b82f6" stop-opacity=".7"/><stop offset="1" stop-color="#3b82f6" stop-opacity="0"/></linearGradient></defs>
+                                    <path d="M0 52 L12 44 L24 47 L38 30 L50 36 L64 18 L76 26 L88 8 L100 14 L100 60 L0 60Z" fill="url(#cg)"/>
+                                    <path d="M0 52 L12 44 L24 47 L38 30 L50 36 L64 18 L76 26 L88 8 L100 14" fill="none" stroke="#93c5fd" stroke-width="2" vector-effect="non-scaling-stroke"/>
+                                </svg>
+                            </div>
+                            <div class="d-box d-card">Huda</div>
+                            <div class="d-box d-tiles">
+                                <b style="background:linear-gradient(135deg,#22c55e,#15803d)"></b>
+                                <b style="background:linear-gradient(135deg,#f97316,#c2410c)"></b>
+                                <b style="background:linear-gradient(135deg,#3b82f6,#1d4ed8)"></b>
+                                <b style="background:linear-gradient(135deg,#a855f7,#6d28d9)"></b>
+                            </div>
+                        </div>
+                    </div></div>
+                    <div class="lap-deck"><div class="keys-bg"></div><div class="keys"></div><div class="pad"></div></div>
+                </div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الخدمات -->
+    <div class="container page-section" id="services">
+        <h2 class="section-title">الخدمات</h2>
+        <div class="grid">
+            <div class="card">
+                <div>
+                    <h3><i class="fa-solid fa-robot"></i> جلسات شرح وتدريب</h3>
+                    <ul>
+                        <li>تعلم كيفية استخدام AI لتصميم المشاريع البرمجية</li>
+                        <li>جلسات تدريبية متخصصة في تحليل البيانات عبر Kaggle</li>
+                        <li>تعلم مهارات الأوفيس (وورد، إكسل، بوربوينت)</li>
+                    </ul>
+                </div>
+                <div class="btn-whatsapp-wrapper" style="margin-top: 15px;">
+                    <a href="https://wa.me/966538252405" class="card-btn" target="_blank" style="width: 100%;">احجز الجلسة <i class="fa-solid fa-arrow-left"></i></a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div>
+                    <h3><i class="fa-solid fa-laptop-code"></i> الخدمات البرمجية المتنوعة</h3>
+                    <ul>
+                        <li>برمجة المواقع وتحليل البيانات</li>
+                        <li>مشاريع المواد الدراسية</li>
+                        <li>رسم المخططات الهندسية</li>
+                        <li>حل الواجبات</li>
+                    </ul>
+                </div>
+                <div class="btn-whatsapp-wrapper" style="margin-top: 15px;">
+                    <a href="https://wa.me/966538252405" class="card-btn" target="_blank" style="width: 100%;">اطلب الخدمة <i class="fa-solid fa-arrow-left"></i></a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div>
+                    <h3><i class="fa-solid fa-folder-open"></i> مشاريع جامعية أخرى</h3>
+                    <ul>
+                        <li>إنجاز المشاريع الجامعية المتنوعة</li>
+                        <li>كتابة البحوث والتقارير وصياغتها</li>
+                        <li>تصميم واجهات المستخدم والتصاميم الإبداعية</li>
+                        <li>عروض بوربوينت أكاديمية مميزة</li>
+                    </ul>
+                </div>
+                <div class="btn-whatsapp-wrapper" style="margin-top: 15px;">
+                    <a href="https://wa.me/966538252405" class="card-btn" target="_blank" style="width: 100%;">اطلب الخدمة <i class="fa-solid fa-arrow-left"></i></a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div>
+                    <h3><i class="fa-solid fa-file-lines"></i> تسجيل المواد الدراسية</h3>
+                    <ul>
+                        <li>مساعدة الطلاب في تسجيل المواد الدراسية بكل إتقان وسهولة.</li>
+                    </ul>
+                </div>
+                <div class="btn-whatsapp-wrapper" style="margin-top: 15px;">
+                    <a href="https://wa.me/966538252405" class="card-btn" target="_blank" style="width: 100%;">اطلب الخدمة <i class="fa-solid fa-arrow-left"></i></a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div>
+                    <h3><i class="fa-solid fa-id-card"></i> تصميم السيرة الذاتية (CV)</h3>
+                    <ul>
+                        <li>تصميم وتنسيق سيرة ذاتية احترافية ومميزة تناسب سوق العمل.</li>
+                    </ul>
+                </div>
+                <div class="btn-whatsapp-wrapper" style="margin-top: 15px;">
+                    <a href="https://wa.me/966538252405" class="card-btn" target="_blank" style="width: 100%;">اطلب الخدمة <i class="fa-solid fa-arrow-left"></i></a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div>
+                    <h3><i class="fa-solid fa-image"></i> تصميم وتعديل الصور</h3>
+                    <ul>
+                        <li>خدمات تصميم وتعديل الصور الاحترافية لكافة الاستخدامات.</li>
+                    </ul>
+                </div>
+                <div class="btn-whatsapp-wrapper" style="margin-top: 15px;">
+                    <a href="https://wa.me/966538252405" class="card-btn" target="_blank" style="width: 100%;">اطلب الخدمة <i class="fa-solid fa-arrow-left"></i></a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div>
+                    <h3><i class="fa-solid fa-briefcase"></i> التسجيل في الوظائف</h3>
+                    <ul>
+                        <li>المساعدة في التقديم والتسجيل في الوظائف والبرامج التدريبية المختلفة.</li>
+                    </ul>
+                </div>
+                <div class="btn-whatsapp-wrapper" style="margin-top: 15px;">
+                    <a href="https://wa.me/966538252405" class="card-btn" target="_blank" style="width: 100%;">اطلب الخدمة <i class="fa-solid fa-arrow-left"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- قسم الكليات -->
+    <div class="container page-section" id="colleges">
+        <h2 class="section-title">الكليات</h2>
+        <div class="global-payment-notice">
+            <i class="fa-solid fa-credit-card"></i> متاح الدفع لمشاريع التخرج على فترات ميسرة خلال الترم الدراسي!
+        </div>
+        <div class="grid">
+            <div class="card">
+                <div>
+                    <h3><i class="fa-solid fa-laptop-code"></i> كلية الحاسب</h3>
+                    <ul>
+                        <li class="main-item">مشاريع التخرج:</li>
+                        <li class="sub-item">برمجة</li>
+                        <li class="sub-item">تقارير</li>
+                        <li class="sub-item">عرض</li>
+                        <li class="sub-item">توثيق</li>
+                        <li class="sub-item">شرح</li>
+                        <li class="sub-item">تثبيت</li>
+
+                        <li class="main-item">مشاريع التدريب التعاوني:</li>
+                        <li class="sub-item">تقرير نهائي</li>
+                        <li class="sub-item">تقارير شهرية</li>
+                        <li class="sub-item">برمجة الموقع</li>
+                        <li class="sub-item">عرض</li>
+                        <li class="sub-item">تثبيت</li>
+                        <li class="sub-item">شرح</li>
+
+                        <li class="main-item">مشاريع البحث العلمي:</li>
+                        <li class="sub-item">تقارير</li>
+                        <li class="sub-item">عرض</li>
+                        <li class="sub-item">البحث العلمي</li>
+                        <li class="sub-item">الورقة العلمية</li>
+
+                        <li class="main-item">مشاريع التخصصات:</li>
+                        <li class="sub-item">علوم حاسب</li>
+                        <li class="sub-item">هندسة حاسب</li>
+                        <li class="sub-item">هندسة برمجيات</li>
+                        <li class="sub-item">ذكاء اصطناعي</li>
+                        <li class="sub-item">علوم البيانات</li>
+                        <li class="sub-item">أمن بيانات</li>
+                        <li class="sub-item">هندسة شبكات</li>
+
+                        <li class="main-item" style="margin-top: 15px;">وغيرها من المواد</li>
+                    </ul>
+                </div>
+                <div class="btn-whatsapp-wrapper" style="margin-top: 20px;">
+                    <a href="https://wa.me/966538252405" class="card-btn" target="_blank" style="width: 100%;">اطلب خدمات كلية الحاسب <i class="fa-solid fa-arrow-left"></i></a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div>
+                    <h3><i class="fa-solid fa-heart-pulse"></i> الكليات الصحية</h3>
+                    <ul>
+                        <li>دراسات الحالة (Case Study)</li>
+                        <li>التثقيف الصحي (Health Education)</li>
+                        <li>العروض التقديمية (Presentation)</li>
+                        <li>NCP</li>
+                        <li>سجل الحالات السريرية (Clinical Log)</li>
+                        <li>البحوث</li>
+                        <li>بحوث التخرج</li>
+                        <li>مشاريع التخرج</li>
+                        <li>وغيرها من المواد</li>
+                    </ul>
+                </div>
+                <div class="btn-whatsapp-wrapper" style="margin-top: 20px;">
+                    <a href="https://wa.me/966538252405" class="card-btn" target="_blank" style="width: 100%;">اطلب خدمات الكليات الصحية <i class="fa-solid fa-arrow-left"></i></a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div>
+                    <h3><i class="fa-solid fa-chart-line"></i> كليات الإدارة</h3>
+                    <ul>
+                        <li>بحوث التخرج</li>
+                        <li>مشاريع التخرج</li>
+                        <li>العروض التقديمية (Presentation)</li>
+                        <li>مشاريع تخصص Information Management System - IMS</li>
+                        <li>وغيرها من المواد</li>
+                    </ul>
+                </div>
+                <div class="btn-whatsapp-wrapper" style="margin-top: 20px;">
+                    <a href="https://wa.me/966538252405" class="card-btn" target="_blank" style="width: 100%;">اطلب خدمات كليات الإدارة <i class="fa-solid fa-arrow-left"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- قسم مشاريعنا -->
+    <div class="container page-section" id="projects">
+        <h2 class="section-title">مشاريعنا</h2>
+        <div class="grid">
+            <div class="card">
+                <div>
+                    <img src="./bus.png" alt="تتبع الحافلات" class="project-img">
+                    <h3><i class="fa-solid fa-bus"></i> نظام تتبع الحافلات المدرسية</h3>
+                    <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;">
+                        نظام يخدم التعليم يتيح للأهل تتبع أطفالهم عبر تطبيق الويب، معرفة موقع الطفل وحالته، مسح باركود خاص لتسجيل الحضور ومتابعة خط السير حتى الوصول الآمن.
+                    </p>
+                </div>
+                <a href="https://wa.me/966538252405" class="card-btn" target="_blank">اطلب مشروع مشابه <i class="fa-solid fa-arrow-left"></i></a>
+            </div>
+
+            <div class="card">
+                <div>
+                    <img src="./ai.png" alt="ذكاء اصطناعي لتحليل الأعطال" class="project-img">
+                    <h3><i class="fa-solid fa-microchip"></i> نظام الذكاء الاصطناعي لتحليل أعطال الأجهزة</h3>
+                    <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;">
+                        نظام ذكي يعتمد على رفع أو تصوير الأعطال ومشاكل الأجهزة، ليقوم الذكاء الاصطناعي بتحليل المشكلة بدقة واقتراح الحلول والخطوات اللازمة لإصلاحها فوراً.
+                    </p>
+                </div>
+                <a href="https://wa.me/966538252405" class="card-btn" target="_blank">اطلب مشروع مشابه <i class="fa-solid fa-arrow-left"></i></a>
+            </div>
+
+            <div class="card">
+                <div>
+                    <img src="./clinic.png" alt="العيادات الطبية" class="project-img">
+                    <h3><i class="fa-solid fa-hospital"></i> نظام مواعيد العيادات الطبية</h3>
+                    <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;">
+                        موقع تدريب متكامل يخدم المستشفيات لحجز وتأكيد المواعيد الطبية للعيادات، مع إدارة بيانات المرضى والمواعيد بكفاءة عالية وسهولة تامة.
+                    </p>
+                </div>
+                <a href="https://wa.me/966538252405" class="card-btn" target="_blank">اطلب مشروع مشابه <i class="fa-solid fa-arrow-left"></i></a>
+            </div>
+
+            <div class="card">
+                <div>
+                    <img src="./library.png" alt="نظام إدارة مكتبة ذكي" class="project-img">
+                    <h3><i class="fa-solid fa-book"></i> نظام إدارة مكتبة ذكي (Smart Library)</h3>
+                    <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;">
+                        تقرير مشروع تخرج متكامل يشمل الفصول الستة لإدارة الأعضاء، الكتب، والإعارات.
+                    </p>
+                </div>
+                <a href="https://wa.me/966538252405" class="card-btn" target="_blank">اطلب مشروع مشابه <i class="fa-solid fa-arrow-left"></i></a>
+            </div>
+
+            <div class="card">
+                <div>
+                    <img src="./wateco.png" alt="تطبيق وايتكو" class="project-img">
+                    <h3><i class="fa-solid fa-droplet"></i> تطبيق وايتكو (Wateco)</h3>
+                    <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;">
+                        تطبيق متخصص في توصيل صهاريج المياه (وايت ماء) للمنازل والشركات في السعودية.
+                    </p>
+                </div>
+                <a href="https://wa.me/966538252405" class="card-btn" target="_blank">اطلب مشروع مشابه <i class="fa-solid fa-arrow-left"></i></a>
+            </div>
+
+            <div class="card" style="justify-content: center; text-align: center; background: rgba(59, 130, 246, 0.05);">
+                <div>
+                    <i class="fa-solid fa-folder-plus" style="font-size: 2.5rem; color: var(--accent-light); margin-bottom: 1rem;"></i>
+                    <h3 style="justify-content:center;">وغيرها من المشاريع الأخرى</h3>
+                    <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;">
+                        ننفذ مشاريع متنوعة ومخصصة لمختلف المجالات الأكاديمية والبرمجية حسب طلبك وفكرتك الخاصة.
+                    </p>
+                </div>
+                <a href="https://wa.me/966538252405" class="card-btn" target="_blank">تواصل معنا بفكرتك <i class="fa-solid fa-arrow-left"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- قسم الأسئلة الشائعة -->
+    <div class="container page-section" id="faq">
+        <h2 class="section-title">الأسئلة الشائعة</h2>
+        <div class="faq-container">
+            <div class="faq-item">
+                <h4>كيف تعمل خدمة الأقساط لمشاريع التخرج والخدمات؟</h4>
+                <p>نقدم تسهيلات مالية عبر تقسيم تكلفة المشروع على دفعات ميسرة طوال فترة الترم الدراسي لتناسب ميزانيتك.</p>
+            </div>
+            <div class="faq-item">
+                <h4>كيف تتم مناقشة وضمان جودة مشروع التخرج؟</h4>
+                <p>نحرص على تسليم المشروع كاملاً مع التوثيق، بالإضافة إلى جلسة شرح وتدريب مكثفة تفهمك كافة تفاصيل المشروع لضمان جاهزيتك التامة للمناقشة.</p>
+            </div>
+            <div class="faq-item">
+                <h4>ما هي آلية الطلب والتواصل؟</h4>
+                <p>يمكنك الضغط مباشرة على زر الواتساب أو التليجرام في الأعلى أو في الخدمة المطلوبة وسنتولى الرد عليك فوراً.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p style="color: var(--text-dark); font-weight: 700;">جميع الحقوق محفوظة © عالم هُدى الرقمي</p>
+        <p>مُنذ 2024</p>
+        <p style="margin-top: 10px; font-size: 0.9rem;">جاهزون لمساعدتك في إنجاز متطلباتك الدراسية بأعلى درجات الإتقان</p>
+    </footer>
+
+    <script>
+        const PAGES = ['hero', 'services', 'colleges', 'projects', 'faq'];
+        function render() {
+            let id = location.hash.replace('#', '');
+            if (!PAGES.includes(id)) id = 'hero';
+            document.querySelectorAll('.page-section').forEach(sec => sec.classList.toggle('active', sec.id === id));
+            document.querySelectorAll('#mainNav a').forEach(a => a.classList.toggle('active', a.dataset.sec === id));
+            document.getElementById('mainNav').classList.remove('open');
+            window.scrollTo(0, 0);
+        }
+        window.addEventListener('hashchange', render);
+        render();
+    </script>
+
+</body>
+</html>
